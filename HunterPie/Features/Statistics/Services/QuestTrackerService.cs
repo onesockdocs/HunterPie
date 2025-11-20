@@ -62,16 +62,16 @@ internal class QuestTrackerService : IContextInitializer, IDisposable
         if (_statisticsService is null)
             return;
 
-        if (!await _accountUseCase.IsValidSessionAsync() || !_accountConfig.IsHuntUploadEnabled)
-            return;
+        //if (!await _accountUseCase.IsValidSessionAsync() || !_accountConfig.IsHuntUploadEnabled)
+        //    return;
 
         HuntStatisticsModel exported = _statisticsService.Export();
 
-        if (e.Status != QuestStatus.Success || !ShouldUpload(exported))
-        {
-            _logger.Debug($"Quest not uploaded (status: {e.Status}, monsters: {exported.Monsters.Count})");
-            return;
-        }
+        //if (e.Status != QuestStatus.Success || !ShouldUpload(exported))
+        //{
+        //    _logger.Debug($"Quest not uploaded (status: {e.Status}, monsters: {exported.Monsters.Count})");
+        //    return;
+        //}
 
         DateTime questFinishedAt = exported.StartedAt.Add(e.TimeElapsed);
         string newHash = await GenerateUniqueHashAsync(questFinishedAt, exported.Hash);

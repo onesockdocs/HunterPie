@@ -55,6 +55,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Integrations\Poogie\Statistics\PoogieStatisticsConnector.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Icon.ico" />
   </ItemGroup>
 
