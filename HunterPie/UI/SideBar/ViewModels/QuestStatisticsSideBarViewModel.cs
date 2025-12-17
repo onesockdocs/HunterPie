@@ -46,8 +46,9 @@ internal class QuestStatisticsSideBarViewModel : ViewModel, ISideBarViewModel
 
     private void Subscribe()
     {
-        _accountUseCase.SignIn += (_, _) => IsAvailable = true;
-        _accountUseCase.SessionStart += (_, _) => IsAvailable = true;
-        _accountUseCase.SignOut += (_, _) => IsAvailable = false;
+        IsAvailable = true;
+        //_accountUseCase.SignIn += (_, _) => IsAvailable = true;
+        //_accountUseCase.SessionStart += (_, _) => IsAvailable = true;
+        //_accountUseCase.SignOut += (_, _) => IsAvailable = false;
     }
 }

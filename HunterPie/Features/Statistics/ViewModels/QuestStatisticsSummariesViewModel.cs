@@ -95,12 +95,12 @@ internal class QuestStatisticsSummariesViewModel : ViewModel
         if (IsFetchingQuests)
             return;
 
-        UserAccount? account = await _accountUseCase.GetAsync();
+        //UserAccount? account = await _accountUseCase.GetAsync();
 
-        if (account is not { })
-            return;
+        //if (account is not { })
+        //    return;
 
-        MessageType = ConvertTierToMessageType(account.Tier);
+        MessageType = QuestSupporterTierMessageType.NoTierMessage; // ConvertTierToMessageType(account.Tier);
 
         IsFetchingQuests = true;
 
