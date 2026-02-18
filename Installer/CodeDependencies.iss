@@ -381,6 +381,17 @@ begin
       '', False, False);
   end;
 end;
+procedure Dependency_AddDotNet100Desktop;
+begin
+  // https://dotnet.microsoft.com/download/dotnet/8.0
+  if not false then begin
+    Dependency_Add('dotnet100desktop' + Dependency_ArchSuffix + '.exe',
+      '/lcid ' + IntToStr(GetUILanguage) + ' /passive /norestart',
+      '.NET Desktop Runtime 10.0.3' + Dependency_ArchTitle,
+      Dependency_String('https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.3/windowsdesktop-runtime-10.0.3-win-x86.exe', 'https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.3/windowsdesktop-runtime-10.0.3-win-x64.exe'),
+      '', False, False);
+  end;
+end;
 procedure Dependency_AddVC2005;
 begin
   // https://www.microsoft.com/en-us/download/details.aspx?id=26347
@@ -600,7 +611,7 @@ end;
 #define MyAppSetupName 'MyProgram'
 #define MyAppVersion '1.0'
 #define MyAppPublisher 'Inno Setup'
-#define MyAppCopyright 'Copyright Â© Inno Setup'
+#define MyAppCopyright 'Copyright © Inno Setup'
 #define MyAppURL 'https://jrsoftware.org/isinfo.php'
 
 AppName={#MyAppSetupName}

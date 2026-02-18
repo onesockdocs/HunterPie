@@ -18,13 +18,6 @@ Name: {app}; Permissions: users-modify
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\*"
 
-[Files]
-Source: "WorkSans-ExtraLight.ttf"; DestDir: "{autofonts}"; FontInstall: "Work Sans ExtraLight"; Flags: onlyifdoesntexist uninsneveruninstall
-Source: "WorkSans-Light.ttf"; DestDir: "{autofonts}"; FontInstall: "Work Sans Light"; Flags: onlyifdoesntexist uninsneveruninstall
-Source: "WorkSans-Medium.ttf"; DestDir: "{autofonts}"; FontInstall: "Work Sans Medium"; Flags: onlyifdoesntexist uninsneveruninstall
-Source: "WorkSans-SemiBold.ttf"; DestDir: "{autofonts}"; FontInstall: "Work Sans SemiBold"; Flags: onlyifdoesntexist uninsneveruninstall
-Source: "WorkSans.ttf"; DestDir: "{autofonts}"; FontInstall: "Work Sans"; Flags: onlyifdoesntexist uninsneveruninstall
-
 [Icons]
 Name: "{commondesktop}\HunterPie"; Filename: "{app}\HunterPie.exe"; WorkingDir: "{app}"
 
@@ -41,7 +34,7 @@ end;
 
 procedure InitializeWizard;
 begin
-  Dependency_AddDotNet80Desktop
+  Dependency_AddDotNet100Desktop
   DownloadPage := CreateDownloadPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), @OnDownloadProgress);
 end;
 
