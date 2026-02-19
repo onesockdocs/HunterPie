@@ -16,6 +16,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>14.0</LangVersion>
     <DelaySign>False</DelaySign>
+    <CETCompat>False</CETCompat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -184,6 +185,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Address\MonsterHunterRise.3.6.1.1.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Address\MonsterHunterWilds.1.41.0.0.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Address\MonsterHunterWilds.1.40.3.2.map">
