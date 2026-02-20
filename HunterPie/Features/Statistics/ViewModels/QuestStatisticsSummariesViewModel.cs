@@ -11,6 +11,7 @@ using HunterPie.Integrations.Poogie.Common.Models;
 using HunterPie.Integrations.Poogie.Statistics;
 using HunterPie.Integrations.Poogie.Statistics.Models;
 using HunterPie.UI.Architecture;
+using HunterPie.UI.Architecture.Adapter;
 using HunterPie.UI.Navigation;
 using System;
 using System.Collections.ObjectModel;
@@ -23,12 +24,14 @@ internal class QuestStatisticsSummariesViewModel(
     IAccountUseCase accountUseCase,
     IBodyNavigator bodyNavigator,
     QuestDetailsViewModelBuilder questDetailsViewModelBuilder,
-    ILocalizationRepository localizationRepository) : ViewModel
+    ILocalizationRepository localizationRepository,
+    MonsterNameAdapter monsterNameAdapter) : ViewModel
 {
     private readonly PoogieStatisticsConnector _connector = connector;
     private readonly IAccountUseCase _accountUseCase = accountUseCase;
     private readonly IBodyNavigator _bodyNavigator = bodyNavigator;
     private readonly QuestDetailsViewModelBuilder _questDetailsViewModelBuilder = questDetailsViewModelBuilder;
+    private readonly MonsterNameAdapter _monsterNameAdapter = monsterNameAdapter;
 
     public bool HasQuests
     {
@@ -102,7 +105,8 @@ internal class QuestStatisticsSummariesViewModel(
         Summaries.Replace(
             collection: summaries.Elements.Select(it => new QuestStatisticsSummaryViewModel(
                 model: it,
-                localizationRepository: localizationRepository
+                localizationRepository: localizationRepository,
+                monsterNameAdapter: _monsterNameAdapter
             ))
         );
 

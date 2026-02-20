@@ -1,12 +1,15 @@
 ﻿using HunterPie.Core.Architecture.Collections;
 using HunterPie.Core.Client.Localization;
+using HunterPie.Core.Game.Entity.Enemy;
 using HunterPie.Core.Game.Entity.Game.Quest;
 using HunterPie.Integrations.Poogie.Common.Models;
 using HunterPie.Integrations.Poogie.Statistics.Models;
 using HunterPie.UI.Architecture;
+using HunterPie.UI.Architecture.Adapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using GameType = HunterPie.Core.Client.Configuration.Enums.GameType;
 
 namespace HunterPie.Features.Statistics.ViewModels;
@@ -38,7 +41,8 @@ public class QuestStatisticsSummaryViewModel : ViewModel
 
     internal QuestStatisticsSummaryViewModel(
         PoogieQuestSummaryModel model,
-        ILocalizationRepository localizationRepository)
+        ILocalizationRepository localizationRepository,
+        MonsterNameAdapter monsterNameAdapter)
     {
         UploadId = model.Id;
         GameType = model.GameType.ToEntity();
@@ -54,6 +58,28 @@ public class QuestStatisticsSummaryViewModel : ViewModel
             return;
 
         QuestName = localizationRepository.GetQuestNameBy(GameType, details.Id);
+        if (string.IsNullOrEmpty(QuestName) || string.Equals(QuestName, "Unknown mission"))
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (PoogieMonsterSummaryModel monster in model.Monsters)
+            {
+                if (monster.IsTarget)
+                {
+                    VariantType variant = (VariantType?)monster.Variant ?? VariantType.Normal;
+                    if (builder.Length > 0)
+                    {
+                        builder.Append(" ♦ ");
+                    }
+                    builder.Append(monsterNameAdapter.From(GameType, monster.Id, variant));
+                }
+            }
+            string dynamicQuestName = builder.ToString();
+            if (dynamicQuestName.Length > 0)
+            {
+                QuestName = dynamicQuestName;
+            }
+        }
+
         Deaths = details.Deaths;
         MaxDeaths = details.MaxDeaths;
         QuestType = localizationRepository.FindByEnum(details.Type).String;

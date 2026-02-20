@@ -204,8 +204,14 @@ internal class PoogieStatisticsConnector
             ? s.FinishedAt - s.StartedAt
             : (TimeSpan?)null;
 
-        PoogieMonsterSummaryModel[] monsters =
-            Array.Empty<PoogieMonsterSummaryModel>();
+        PoogieMonsterSummaryModel[] monsters = s.Monsters
+            .Select(m => new PoogieMonsterSummaryModel(
+                Id: m.Id,
+                Variant: m.Variant,
+                IsTarget: m.HuntType != null && m.HuntType != Features.Statistics.Models.MonsterHuntType.None,
+                HuntType: m.HuntType
+            ))
+            .ToArray();
 
         return new PoogieQuestSummaryModel(
             Id: stored.Id,
@@ -217,15 +223,9 @@ internal class PoogieStatisticsConnector
         );
     }
 
-    private class StoredHunt
+    private class StoredHunt(string id, PoogieQuestStatisticsModel statistics)
     {
-        public string Id { get; set; }
-        public PoogieQuestStatisticsModel Statistics { get; set; }
-
-        public StoredHunt(string id, PoogieQuestStatisticsModel statistics)
-        {
-            Id = id;
-            Statistics = statistics;
-        }
+        public string Id { get; set; } = id;
+        public PoogieQuestStatisticsModel Statistics { get; set; } = statistics;
     }
 }
