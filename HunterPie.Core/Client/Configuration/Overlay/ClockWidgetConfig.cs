@@ -38,6 +38,10 @@ public class ClockWidgetConfig : IWidgetSettings, ISettings
     public Position Position { get; set; } = new(50, 0);
     #endregion
 
+    [ConfigurationProperty("CLOCK_WIDGET_STRING", group: CommonConfigurationGroups.WIDGET, availableGames: GameProcessType.MonsterHunterWilds)]
+    [ConfigurationConditional(name: nameof(Initialize), withValue: true)]
+    public Observable<bool> IsClockEnabled { get; set; } = true;
+
     [ConfigurationProperty("IS_MOON_PHASES_ENABLED", group: CommonConfigurationGroups.WIDGET, availableGames: GameProcessType.MonsterHunterWilds)]
     [ConfigurationConditional(name: nameof(Initialize), withValue: true)]
     public Observable<bool> IsMoonPhaseEnabled { get; set; } = true;

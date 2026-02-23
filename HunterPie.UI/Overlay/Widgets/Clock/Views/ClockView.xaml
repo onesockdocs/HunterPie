@@ -28,6 +28,16 @@
                 BorderThickness="1"
                 Background="{Binding Source={StaticResource Gray@400}, ConverterParameter={StaticResource Background.Transparency}, Converter={StaticResource BrushOpacityConverter}}"
                 CornerRadius="5">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsClockEnabled.Value}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
             <StackPanel Orientation="Vertical">
                 <!-- Quest Timer -->
                 <Grid>

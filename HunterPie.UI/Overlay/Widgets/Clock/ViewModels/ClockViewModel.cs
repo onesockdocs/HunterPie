@@ -18,5 +18,7 @@ public class ClockViewModel(ClockWidgetConfig config) : WidgetViewModel(config, 
     public ObservableCollection<MoonViewModel> Moons { get; } = new();
     public MoonViewModel? Moon { get; set => SetValue(ref field, value); }
 
+    public Observable<bool> IsClockEnabled => _config.IsClockEnabled;
+
     public Observable<bool> IsMoonPhaseEnabled => _config.IsMoonPhaseEnabled;
 }
